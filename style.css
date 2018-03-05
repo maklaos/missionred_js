@@ -1,5 +1,5 @@
 body {
-  background-color: #000;
+  background-color: #fff;
 }
 
 #wrapper {
@@ -9,5 +9,5 @@ body {
 
 canvas {
 	cursor: crosshair;
-  background-color: #fff;
+  background-color: #000;
 }
