@@ -10,7 +10,11 @@
 <div id="wrapper">
 	<canvas id='game' width='600' height='500'>Element not supported</canvas>
   <div class="score">
-    <div id="count">Count: <span>0</span></div>
+    <div id="count">
+      Count: <span>0</span>
+      Score: <span>0</span>
+      Level: <span>1</span>
+    </div>
   </div>
 </div>
 
