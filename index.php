@@ -8,14 +8,8 @@
 
 <body>
 <div id="wrapper">
-	<canvas id='game' width='600' height='500'>Element not supported</canvas>
-  <div class="score">
-    <div id="statistic">
-      <div id="count"></div>
-      <div id="score"></div>
-      <div id="level"></div>
-    </div>
-  </div>
+	<canvas id='game' width='600' height='650'>Element not supported</canvas>
+  <div id="scores"> </div>
 </div>
 
 <script type="text/javascript" src="game.js"></script>

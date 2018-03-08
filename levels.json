@@ -1,4 +1,14 @@
 {"levels":[
-    {"maxRadius" : "50", "speed" : "40", "points" : "5"},
-    {"maxRadius" : "49", "speed" : "25", "points" : "15"}
+    {"nextLevel" : "35000", "speed" : "60", "points" : "1000"},
+    {"nextLevel" : "85000", "speed" : "63", "points" : "1000"},
+    {"nextLevel" : "160000", "speed" : "66", "points" : "1000"},
+    {"nextLevel" : "210000", "speed" : "69", "points" : "1000"},
+    {"nextLevel" : "275000", "speed" : "72", "points" : "1000"},
+    {"nextLevel" : "340000", "speed" : "75", "points" : "1000"},
+    {"nextLevel" : "410000", "speed" : "78", "points" : "1000"},
+    {"nextLevel" : "480000", "speed" : "81", "points" : "1000"},
+    {"nextLevel" : "550000", "speed" : "83", "points" : "1000"},
+    {"nextLevel" : "620000", "speed" : "85", "points" : "1000"},
+    {"nextLevel" : "690000", "speed" : "87", "points" : "1000"},
+    {"nextLevel" : "infinity", "speed" : "89", "points" : "1000"}
   ]}
