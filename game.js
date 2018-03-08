@@ -1,6 +1,13 @@
 let canvas = document.getElementById('game');
 let context = canvas.getContext('2d');
-let count = document.getElementById('count');
+
+let countField = document.getElementById('count');
+let scoreField = document.getElementById('score');
+let levelField = document.getElementById('level');
+
+let countName = 'Count: ';
+let scoreName = 'Score: ';
+let levelName = 'Level: ';
 
 let state = 'welcome';
 
@@ -74,10 +81,11 @@ function addCount(){
     statistic.level = 2;
   }
 
-  count.children[0].innerHTML = ++statistic.count;
-  statistic.score = statistic.count * 5;
-  count.children[1].innerHTML = statistic.score;
-  count.children[2].innerHTML = statistic.level;
+  statistic.score += Number(points);
+
+  countField.innerHTML = countName + ++statistic.count;
+  scoreField.innerHTML = scoreName + statistic.score;
+  levelField.innerHTML = levelName + statistic.level;
 
 }
 
@@ -123,9 +131,9 @@ function clearStatistic() {
   statistic.score = 0;
   statistic.level = 1;
 
-  count.children[0].innerHTML = statistic.count;
-  count.children[1].innerHTML = statistic.score;
-  count.children[2].innerHTML = statistic.level;
+  countField.innerHTML = countName + statistic.count;
+  scoreField.innerHTML = scoreName + statistic.score;
+  levelField.innerHTML = levelName + statistic.level;
 
   level(1);
 }
