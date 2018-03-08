@@ -1,0 +1,4 @@
+{"levels":[
+    {"maxRadius" : "50", "speed" : "40", "points" : "5"},
+    {"maxRadius" : "49", "speed" : "25", "points" : "15"}
+  ]}

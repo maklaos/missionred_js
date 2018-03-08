@@ -15,18 +15,7 @@ let statistic = {
   score: 0,
   level: 1
 };
-let levels = {
-  "1": {
-    maxRadius: 50,
-    speed: 40,
-    points: 5
-  },
-  "2": {
-    maxRadius: 49,
-    speed: 25,
-    points: 15
-  }
-}
+let levels;
 
 function update() {
   timer++;
@@ -36,16 +25,16 @@ function update() {
       R: 1,
       x: Math.floor(Math.random() * (canvas.width - maxRadius * 2) + maxRadius),
       y: Math.floor(Math.random() * (canvas.height - maxRadius * 2) + maxRadius),
-      grow: true
+      growing: true
     });
   }
 
   for (i in circles) {
-    if (circles[i].grow) {
+    if (circles[i].growing) {
       circles[i].R++;
 
       if (circles[i].R == maxRadius) {
-        circles[i].grow = false;
+        circles[i].growing = false;
       }
     } else{
       circles[i].R--;
@@ -74,9 +63,9 @@ function render() {
 }
 
 function level(n) {
-  maxRadius = levels[n].maxRadius;
-  speed = levels[n].speed;
-  points = levels[n].points;
+  maxRadius = levels[n-1].maxRadius;
+  speed = levels[n-1].speed;
+  points = levels[n-1].points;
 }
 
 function addCount(){
@@ -208,6 +197,8 @@ function init() {
       fire(event);
     }
   });
+
+  httpGet('levels.json', getLevels);
 }
 
 function start() {
@@ -216,3 +207,17 @@ function start() {
 }
 
 document.addEventListener("DOMContentLoaded", start);
+
+function httpGet(url, callback) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+
+function getLevels(response) {
+  levels = JSON.parse(response).levels;
+}
