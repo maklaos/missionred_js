@@ -1,0 +1,13 @@
+lang.welcome = ' Witamy';
+lang.to = ' w';
+lang.score = 'Punkty';
+lang.lives = 'Życia';
+lang.hits = 'Łapanie';
+lang.level = 'Level';
+lang.misses = 'Misses';
+lang.levelCaps = 'LEVEL';
+lang.gameover = 'Skończyła';
+lang.accuracy = 'Dokładność';
+lang.playAgain = 'kliknij i graj ponownie';
+lang.toStart = 'kliknij, aby rozpocząć';
+lang.game = 'Gra';

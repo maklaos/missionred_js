@@ -1,0 +1,13 @@
+lang.welcome = ' Вітаємо';
+lang.to = ' в';
+lang.score = 'Очки';
+lang.lives = 'Життя';
+lang.hits = 'Попадання';
+lang.level = 'Рівень';
+lang.misses = 'Промахи';
+lang.levelCaps = 'РІВЕНЬ';
+lang.gameover = 'Потрачено';
+lang.accuracy = 'Точність';
+lang.playAgain = 'зіграти знову';
+lang.toStart = 'клікніть щоб почати';
+lang.game = 'Ігра';

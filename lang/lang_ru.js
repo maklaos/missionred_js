@@ -1,0 +1,13 @@
+lang.welcome = 'Welcome';
+lang.to = 'to';
+lang.score = 'Очки';
+lang.lives = 'Жызни';
+lang.hits = 'Попадания';
+lang.level = 'Уровень';
+lang.misses = 'Промахи';
+lang.levelCaps = 'УРОВЕНЬ';
+lang.gameover = 'Потрачено';
+lang.accuracy = 'Точность';
+lang.playAgain = 'играть еше раз';
+lang.toStart = 'нажмите чтобы начать';
+lang.game = 'Игра';

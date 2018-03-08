@@ -12,6 +12,9 @@ let speed;
 let points;
 
 let circles = [];
+let hitTexts = [];
+let levelText = [];
+
 let statistic = {
   hits: 0,
   misses: 0,
@@ -51,6 +54,22 @@ function update() {
     }
   }
 
+  for (i in hitTexts) {
+    hitTexts[i].time--;
+
+    if(hitTexts[i].time == 0) {
+      hitTexts.splice(i, 1);
+    }
+  }
+
+  for (i in levelText) {
+    levelText[i].time--;
+
+    if(levelText[i].time == 0) {
+      levelText.splice(i, 1);
+    }
+  }
+
   if (statistic.lives === 0) {
     state = 'gameover';
   }
@@ -62,11 +81,11 @@ function render() {
   context.strokeStyle = "#fff";
   context.font = "bold 20px Arial";
   context.lineWidth = 1;
-  context.fillText('Score: ' + statistic.score, 10, 25);
-  context.fillText('Lives: ' + statistic.lives, 520, 25);
-	context.fillText('Hits: ' + statistic.hits, 10, 640);
-  context.fillText('Level: ' + statistic.level, 250, 640);
-  context.fillText('Misses: ' + statistic.misses, 480, 640);
+  context.fillText(lang.score + ': ' + statistic.score, 10, 25);
+  context.fillText(lang.lives + ': ' + statistic.lives, 512, 25);
+	context.fillText(lang.hits + ': ' + statistic.hits, 10, 640);
+  context.fillText(lang.level + ': ' + statistic.level, 250, 640);
+  context.fillText(lang.misses + ': ' + statistic.misses, 480, 640);
 
   context.strokeStyle  = '#f00';
   context.fillStyle  = '#fff';
@@ -79,13 +98,26 @@ function render() {
     context.stroke();
   }
 
+  for (i in hitTexts) {
+    context.fillStyle = hitTexts[i].color;
+    context.font = "bold 10px Arial";
+  	context.fillText(hitTexts[i].text, hitTexts[i].x, hitTexts[i].y);
+    context.fillStyle  = '#fff';
+  }
 
+  for (i in levelText) {
+    context.fillStyle = "#fff";
+    context.font = "bold 30px Arial";
+  	context.fillText(levelText[i].text, levelText[i].x, levelText[i].y);
+  }
 }
 
 function level(n) {
   nextLevel = levels[n-1].nextLevel;
   speed = levels[n-1].speed;
   points = levels[n-1].points;
+
+  levelAnimation(n);
 }
 
 function addCount(){
@@ -110,6 +142,7 @@ function fire(event) {
     if (L <= circles[i].R) {
       circles.splice(i, 1);
       addCount();
+      hitAnimation(event, '+', '#0f0');
       shoot = true;
     }
   }
@@ -117,20 +150,28 @@ function fire(event) {
   if (shoot == false) {
     statistic.misses++;
     statistic.score -= points;
+    hitAnimation(event, '-', '#f00');
   }
 }
 
 // animate text
-function hitAnimation() {
-
+function hitAnimation(event, sign, color) {
+  hitTexts.push({
+    x: event.offsetX + maxRadius / 3,
+    y: event.offsetY - maxRadius / 3,
+    text: sign + points,
+    time: 10,
+    color: color
+  });
 }
 
-function missAnimation() {
-
-}
-
-function levelAnimation() {
-
+function levelAnimation(num) {
+  levelText.push({
+    x: canvas.width / 2 - 50,
+    y: canvas.height / 2,
+    time: 100,
+    text: lang.levelCaps + ' ' + num
+  });
 }
 
 // engine
@@ -164,30 +205,30 @@ function gameover() {
 	context.font = "bold 85px Arial";
 	context.strokeStyle = "#f00";
 	context.lineWidth = 5;
-	context.strokeText('Game Over', 70, 250);
+	context.strokeText(lang.gameover, 70, 250);
 
   context.font = "bold 30px Arial";
   context.lineWidth = 2;
 
   let accuracy = 100 - (statistic.misses / statistic.hits) * 100;
 
-	context.strokeText('Score: ' + statistic.score, 90, 300);
-  context.strokeText('Level: ' + statistic.level, 90, 330);
-  context.strokeText('Hits: ' + statistic.hits, 90, 360);
-  context.strokeText('Misses: ' + statistic.misses, 90, 390);
-  context.strokeText('Accuracy: ' + Math.round(accuracy) + '%', 90, 420);
+	context.strokeText(lang.score + ': ' + statistic.score, 90, 300);
+  context.strokeText(lang.level + ': ' + statistic.level, 90, 330);
+  context.strokeText(lang.hits + ': ' + statistic.hits, 90, 360);
+  context.strokeText(lang.misses + ': ' + statistic.misses, 90, 390);
+  context.strokeText(lang.accuracy + ': ' + Math.round(accuracy) + '%', 90, 420);
 
   context.font = "bold 48px Arial";
   context.lineWidth = 2;
-	context.strokeText('click to play again', 90, 550);
+	context.strokeText(lang.playAgain, 90, 550);
 
   statistic.game++;
-  scores.innerHTML += 'Game  ' + statistic.game + ': ';
-  scores.innerHTML += '(Score: ' + statistic.score + ') ';
-  scores.innerHTML += '(Level: ' + statistic.level + ') ';
-  scores.innerHTML += '(Hits: ' + statistic.hits + ') ';
-  scores.innerHTML += '(Misses: ' + statistic.misses + ') ';
-  scores.innerHTML += '(Accuracy: ' + Math.round(accuracy) + '%' + ')</br>';
+  scores.innerHTML += lang.game +' ' + statistic.game + ': ';
+  scores.innerHTML += '(' + lang.score + ': ' + statistic.score + ') ';
+  scores.innerHTML += '(' + lang.level + ': ' + statistic.level + ') ';
+  scores.innerHTML += '(' + lang.hits + ': ' + statistic.hits + ') ';
+  scores.innerHTML += '(' + lang.misses + ': ' + statistic.misses + ') ';
+  scores.innerHTML += '(' + lang.accuracy + ': ' + Math.round(accuracy) + '%' + ')</br>';
 }
 
 function welcome() {
@@ -199,16 +240,16 @@ function welcome() {
 	context.font = "bold 120px Arial";
   context.lineWidth = 5;
 
-	context.strokeText('Welcome', 50, 200);
+	context.strokeText(lang.welcome, 50, 200);
 
-  context.strokeText('to', 230, 300);
+  context.strokeText(lang.to, 230, 300);
 
   context.font = "bold 100px Arial";
   context.strokeText('Missionred', 50, 400);
 
   context.font = "bold 48px Arial";
   context.lineWidth = 2;
-	context.strokeText('click anywhere to start', 50, 500);
+	context.strokeText(lang.toStart, 50, 500);
 }
 
 function game(){
